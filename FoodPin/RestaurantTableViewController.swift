@@ -19,7 +19,7 @@ class RestaurantTableViewController: UITableViewController {
         
     var restaurantTypes = ["Coffee & Tea Shop", "Cafe", "Tea House", "Austrian / Causual Drink", "French", "Bakery", "Bakery", "Chocolate", "Cafe", "American / Seafood", "American", "American", "Breakfast & Brunch", "Coffee & Tea", "Coffee & Tea", "Latin American", "Spanish", "Spanish", "Spanish", "British", "Thai"]
     
-    var restaurantIsVisised = Array(repeating: false, count: 21)
+    var restaurantIsVisited = Array(repeating: false, count: 21)
     
     
     override func viewDidLoad() {
@@ -88,16 +88,16 @@ class RestaurantTableViewController: UITableViewController {
         let callAction = UIAlertAction(title: "Call " + "123-000-\(indexPath.row)", style: .default, handler: callActionHandler)
         optionMenu.addAction(callAction)
         
-        let alertTitle = self.restaurantIsVisised[indexPath.row] ? "Uncheck in" : "Check in"
+        let alertTitle = self.restaurantIsVisited[indexPath.row] ? "Uncheck in" : "Check in"
         
         let checkInAction = UIAlertAction(title: alertTitle, style: .default, handler: {
             (action:UIAlertAction!) -> Void in
             
             let cell = tableView.cellForRow(at: indexPath) as? RestaurantTableViewCell
             
-            cell?.accessoryType = self.restaurantIsVisised[indexPath.row] ? .none : .checkmark
+            cell?.accessoryType = self.restaurantIsVisited[indexPath.row] ? .none : .checkmark
             
-            self.restaurantIsVisised[indexPath.row] = true
+            self.restaurantIsVisited[indexPath.row] = self.restaurantIsVisited[indexPath.row] ? false : true
             
         })
         optionMenu.addAction(checkInAction)
@@ -116,17 +116,28 @@ class RestaurantTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            restaurantNames.remove(at: indexPath.row)
+            restaurantLocations.remove(at: indexPath.row)
+            restaurantTypes.remove(at: indexPath.row)
+            restaurantIsVisited.remove(at: indexPath.row)
+            restaurantImages.remove(at: indexPath.row)
+            
+            
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
+        
+        tableView.deleteRows(at: [indexPath], with: .fade)
+//        tableView.reloadData()
     }
-    */
+    
 
     /*
     // Override to support rearranging the table view.
