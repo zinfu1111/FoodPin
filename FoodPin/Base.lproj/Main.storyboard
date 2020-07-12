@@ -124,11 +124,36 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gmb-gN-LXF">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="l5l-fj-ZrR">
+                                <rect key="frame" x="183" y="412" width="48" height="72"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jy6-Pw-gAi">
+                                        <rect key="frame" x="0.0" y="0.0" width="48" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ult-Qd-QlX">
+                                        <rect key="frame" x="0.0" y="24" width="48" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K26-A2-7of">
+                                        <rect key="frame" x="0.0" y="48" width="48" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="gmb-gN-LXF" firstAttribute="leading" secondItem="XAR-cR-ND9" secondAttribute="leading" id="Dn7-ey-wPv"/>
                             <constraint firstItem="gmb-gN-LXF" firstAttribute="top" secondItem="ODA-Ji-nfg" secondAttribute="top" id="O0B-Tq-bfH"/>
+                            <constraint firstItem="l5l-fj-ZrR" firstAttribute="centerX" secondItem="ODA-Ji-nfg" secondAttribute="centerX" id="TG7-4S-kAR"/>
+                            <constraint firstItem="l5l-fj-ZrR" firstAttribute="centerY" secondItem="ODA-Ji-nfg" secondAttribute="centerY" id="V44-sV-FiB"/>
                             <constraint firstItem="gmb-gN-LXF" firstAttribute="trailing" secondItem="XAR-cR-ND9" secondAttribute="trailing" id="i3I-fU-qRY"/>
                             <constraint firstAttribute="bottom" secondItem="gmb-gN-LXF" secondAttribute="bottom" id="kX7-QP-zWZ"/>
                         </constraints>
@@ -136,7 +161,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="2x5-u4-Bi7"/>
                     <connections>
+                        <outlet property="locationLabel" destination="K26-A2-7of" id="ZGz-bw-doQ"/>
+                        <outlet property="nameLabel" destination="Jy6-Pw-gAi" id="KRL-b8-UuE"/>
                         <outlet property="restaurantImageView" destination="gmb-gN-LXF" id="eh7-Nz-yLQ"/>
+                        <outlet property="typeLabel" destination="ult-Qd-QlX" id="42R-gW-ROP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sdj-6c-SAV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
