@@ -168,7 +168,27 @@ class RestaurantTableViewController: UITableViewController {
         return swipeConfiguration
     }
     
-    
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let checkAction = UIContextualAction(style: .normal, title: "Check"){
+            (action, sourceView, completionHandler) in
+            
+            let cell = tableView.cellForRow(at: indexPath) as? RestaurantTableViewCell
+            
+            cell?.heartImageView.isHidden = self.restaurantIsVisited[indexPath.row]
+            
+            self.restaurantIsVisited[indexPath.row] = self.restaurantIsVisited[indexPath.row] ? false : true
+            
+            completionHandler(true)
+        }
+        
+        checkAction.backgroundColor = UIColor(red: 0.0/255.0, green: 255.0/255.0, blue: 0.0/255.0, alpha: 1.0)
+        checkAction.image = self.restaurantIsVisited[indexPath.row] ? UIImage(systemName: "arrow.uturn.left") : UIImage(systemName: "checkmark")
+        
+        let swipeConfiguration = UISwipeActionsConfiguration(actions: [checkAction])
+        
+        return swipeConfiguration
+    }
 
     /*
     // Override to support conditional editing of the table view.
