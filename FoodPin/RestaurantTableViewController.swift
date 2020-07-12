@@ -57,6 +57,7 @@ class RestaurantTableViewController: UITableViewController {
         cell.thumbnailImageView.image = UIImage(named: restaurantImages[indexPath.row])
         cell.typeLabel.text = restaurantTypes[indexPath.row]
         cell.locationLabel.text = restaurantLocations[indexPath.row]
+        cell.heartImageView.isHidden = !self.restaurantIsVisited[indexPath.row]
         
         return cell
     }
@@ -95,7 +96,9 @@ class RestaurantTableViewController: UITableViewController {
             
             let cell = tableView.cellForRow(at: indexPath) as? RestaurantTableViewCell
             
-            cell?.accessoryType = self.restaurantIsVisited[indexPath.row] ? .none : .checkmark
+//            cell?.accessoryType = self.restaurantIsVisited[indexPath.row] ? .none : .checkmark
+            
+            cell?.heartImageView.isHidden = self.restaurantIsVisited[indexPath.row]
             
             self.restaurantIsVisited[indexPath.row] = self.restaurantIsVisited[indexPath.row] ? false : true
             
@@ -107,6 +110,65 @@ class RestaurantTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: false)
     }
     
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete"){
+            (action, sourceView, completionHandler) in
+            
+            self.restaurantNames.remove(at: indexPath.row)
+            self.restaurantLocations.remove(at: indexPath.row)
+            self.restaurantTypes.remove(at: indexPath.row)
+            self.restaurantIsVisited.remove(at: indexPath.row)
+            self.restaurantImages.remove(at: indexPath.row)
+            
+            self.tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            completionHandler(true)
+        }
+        
+        deleteAction.backgroundColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)
+        deleteAction.image = UIImage(systemName: "trash")
+        
+        
+        let shareAction = UIContextualAction(style: .normal, title: "Share"){
+            (action, sourceView, completionHandler) in
+            
+            let defaultText = "Just checking in at " + self.restaurantNames[indexPath.row]
+//            let activityController = UIActivityViewController(activityItems: [defaultText], applicationActivities: nil)
+            
+            let activityController: UIActivityViewController
+            
+            if let imageToShare = UIImage(named: self.restaurantImages[indexPath.row]){
+                
+                activityController = UIActivityViewController(activityItems: [defaultText, imageToShare], applicationActivities: nil)
+                
+            }else{
+                
+                activityController = UIActivityViewController(activityItems: [defaultText], applicationActivities: nil)
+                
+            }
+            
+            if let popoverController = activityController.popoverPresentationController{
+                if let cell = tableView.cellForRow(at: indexPath){
+                    popoverController.sourceView = cell
+                    popoverController.sourceRect = cell.bounds
+                }
+            }
+            
+            self.present(activityController, animated: true, completion: nil)
+            completionHandler(true)
+        }
+        
+        shareAction.backgroundColor = UIColor(red: 254.0/255.0, green: 149.0/255.0, blue: 38.0/255.0, alpha: 1.0)
+        shareAction.image = UIImage(systemName: "square.and.arrow.up")
+        
+        
+        let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction, shareAction])
+        
+        return swipeConfiguration
+    }
+    
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -116,7 +178,7 @@ class RestaurantTableViewController: UITableViewController {
     }
     */
 
-    
+    /*
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
@@ -137,7 +199,7 @@ class RestaurantTableViewController: UITableViewController {
         tableView.deleteRows(at: [indexPath], with: .fade)
 //        tableView.reloadData()
     }
-    
+    */
 
     /*
     // Override to support rearranging the table view.
