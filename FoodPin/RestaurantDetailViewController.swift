@@ -13,7 +13,8 @@ class RestaurantDetailViewController: UIViewController {
     @IBOutlet var restaurantImageView: UIImageView!
     
     
-    var restaurantImageName = ""
+    var restaurant = Restaurant()
+    
     
     
     override func viewDidLoad() {
