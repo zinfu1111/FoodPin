@@ -35,6 +35,8 @@ class RestaurantTableViewController: UITableViewController {
         Restaurant(name: "CASK Pub and Kitchen", type: "Thai", location: "London", image: "caskpubkitchen", isVisited: false)
     ]
     
+    // MARK: - 視圖控制器生命週期
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -131,8 +133,8 @@ class RestaurantTableViewController: UITableViewController {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete"){
             (action, sourceView, completionHandler) in
             
+            // 從資料列刪除
             self.restaurants.remove(at: indexPath.row)
-            
             self.tableView.deleteRows(at: [indexPath], with: .fade)
             
             completionHandler(true)
@@ -258,10 +260,7 @@ class RestaurantTableViewController: UITableViewController {
         if segue.identifier == "showRestaurantDetail"{
             if let indexPath = tableView.indexPathForSelectedRow {
                 let destinationController = segue.destination as! RestaurantDetailViewController
-                destinationController.restaurantImageName = restaurantImages[indexPath.row]
-                destinationController.restaurantName = restaurantNames[indexPath.row]
-                destinationController.restaurantType = restaurantTypes[indexPath.row]
-                destinationController.restaurantLocation = restaurantLocations[indexPath.row]
+                destinationController.restaurant = restaurants[indexPath.row]
             }
         }
         
