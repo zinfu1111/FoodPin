@@ -10,10 +10,10 @@ import UIKit
 
 class RestaurantDetailViewController: UIViewController {
 
-    @IBOutlet var restaurantImageView: UIImageView!
-    @IBOutlet var nameLabel:UILabel!
-    @IBOutlet var locationLabel:UILabel!
-    @IBOutlet var typeLabel:UILabel!
+    
+    @IBOutlet var tableView: UITableView!
+    @IBOutlet var headerView: RestaurantDetailHeaderView!
+    
     
     var restaurant = Restaurant()
     
@@ -21,11 +21,13 @@ class RestaurantDetailViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-//        navigationItem.largeTitleDisplayMode = .never
-        self.restaurantImageView.image = UIImage(named: restaurant.image)
-        self.nameLabel.text = restaurant.name
-        self.typeLabel.text = restaurant.type
-        self.locationLabel.text = restaurant.location
+        navigationItem.largeTitleDisplayMode = .never
+        
+        headerView.nameLabel.text = restaurant.name
+        headerView.typeLabel.text = restaurant.type
+        headerView.headerImageView.image = UIImage(named: restaurant.image)
+        headerView.heartImageView.isHidden = (restaurant.isVisited) ? false : true
+        
     }
     
 
