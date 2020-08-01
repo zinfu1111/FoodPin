@@ -20,6 +20,14 @@ class RestaurantDetailViewController: UIViewController, UITableViewDelegate, UIT
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.topItem?.title = ""
+        
+        tableView.contentInsetAdjustmentBehavior = .never
+        
+        
         navigationItem.largeTitleDisplayMode = .never
         
         headerView.nameLabel.text = restaurant.name
@@ -30,6 +38,14 @@ class RestaurantDetailViewController: UIViewController, UITableViewDelegate, UIT
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.hidesBarsOnSwipe = false
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -72,6 +88,10 @@ class RestaurantDetailViewController: UIViewController, UITableViewDelegate, UIT
         }
         
         
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
 
 

@@ -41,6 +41,12 @@ class RestaurantTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        if let customFont = UIFont(name: "Rubik-Medium", size: 40.0) {
+            navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor(red: 231, green: 76, blue: 60),NSAttributedString.Key.font: customFont]
+        }
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -50,6 +56,16 @@ class RestaurantTableViewController: UITableViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         tableView.cellLayoutMarginsFollowReadableWidth = true
         
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.hidesBarsOnSwipe = true
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        navigationController?.navigationBar.topItem?.title = "FoodPin"
     }
 
     // MARK: - Table view data source
@@ -80,54 +96,6 @@ class RestaurantTableViewController: UITableViewController {
         return cell
     }
     
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//
-//        let optionMenu = UIAlertController(title: nil, message: "123", preferredStyle: .actionSheet)
-//
-//        if let popoverController = optionMenu.popoverPresentationController{
-//            if let cell = tableView.cellForRow(at: indexPath){
-//                popoverController.sourceView = cell
-//                popoverController.sourceRect = cell.bounds
-//            }
-//        }
-//
-//        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-//        optionMenu.addAction(cancelAction)
-//
-//
-//        let callActionHandler = {(action:UIAlertAction) -> Void in
-//
-//            let alertMessage = UIAlertController(title: "no", message: "no call", preferredStyle: .alert)
-//
-//            alertMessage.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-//
-//            self.present(alertMessage, animated: true, completion: nil)
-//        }
-//
-//        let callAction = UIAlertAction(title: "Call " + "123-000-\(indexPath.row)", style: .default, handler: callActionHandler)
-//        optionMenu.addAction(callAction)
-//
-//        let alertTitle = self.restaurantIsVisited[indexPath.row] ? "Uncheck in" : "Check in"
-//
-//        let checkInAction = UIAlertAction(title: alertTitle, style: .default, handler: {
-//            (action:UIAlertAction!) -> Void in
-//
-//            let cell = tableView.cellForRow(at: indexPath) as? RestaurantTableViewCell
-//
-////            cell?.accessoryType = self.restaurantIsVisited[indexPath.row] ? .none : .checkmark
-//
-//            cell?.heartImageView.isHidden = self.restaurantIsVisited[indexPath.row]
-//
-//            self.restaurantIsVisited[indexPath.row] = self.restaurantIsVisited[indexPath.row] ? false : true
-//
-//        })
-//        optionMenu.addAction(checkInAction)
-//
-//        present(optionMenu,animated: true,completion: nil)
-//
-//        tableView.deselectRow(at: indexPath, animated: false)
-//    }
-    
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete"){
@@ -140,7 +108,7 @@ class RestaurantTableViewController: UITableViewController {
             completionHandler(true)
         }
         
-        deleteAction.backgroundColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)
+        deleteAction.backgroundColor = UIColor(red: 231, green: 76, blue: 60)
         deleteAction.image = UIImage(systemName: "trash")
         
         
@@ -173,7 +141,7 @@ class RestaurantTableViewController: UITableViewController {
             completionHandler(true)
         }
         
-        shareAction.backgroundColor = UIColor(red: 254.0/255.0, green: 149.0/255.0, blue: 38.0/255.0, alpha: 1.0)
+        shareAction.backgroundColor = UIColor(red: 254, green: 149, blue: 38)
         shareAction.image = UIImage(systemName: "square.and.arrow.up")
         
         
@@ -195,59 +163,13 @@ class RestaurantTableViewController: UITableViewController {
             completionHandler(true)
         }
         
-        checkAction.backgroundColor = UIColor(red: 0.0/255.0, green: 255.0/255.0, blue: 0.0/255.0, alpha: 1.0)
+        checkAction.backgroundColor = UIColor(red: 38, green: 162, blue: 78)
         checkAction.image = self.restaurants[indexPath.row].isVisited ? UIImage(systemName: "arrow.uturn.left") : UIImage(systemName: "checkmark")
         
         let swipeConfiguration = UISwipeActionsConfiguration(actions: [checkAction])
         
         return swipeConfiguration
     }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-//            tableView.deleteRows(at: [indexPath], with: .fade)
-            
-            restaurantNames.remove(at: indexPath.row)
-            restaurantLocations.remove(at: indexPath.row)
-            restaurantTypes.remove(at: indexPath.row)
-            restaurantIsVisited.remove(at: indexPath.row)
-            restaurantImages.remove(at: indexPath.row)
-            
-            
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }
-        
-        tableView.deleteRows(at: [indexPath], with: .fade)
-//        tableView.reloadData()
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 
     
     // MARK: - Navigation
