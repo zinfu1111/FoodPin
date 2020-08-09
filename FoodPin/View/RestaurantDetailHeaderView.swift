@@ -28,6 +28,7 @@ class RestaurantDetailHeaderView: UIView {
             heartImageView.tintColor = .white
         }
     }
+    @IBOutlet var ratingImageView: UIImageView!
     
     /*
     // Only override draw() if you perform custom drawing.
