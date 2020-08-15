@@ -170,6 +170,12 @@ class RestaurantTableViewController: UITableViewController {
         
         return swipeConfiguration
     }
+    
+    // MARK: - Button Action
+    
+    @IBAction func unwindToHome(segue: UIStoryboardSegue){
+        dismiss(animated: true, completion: nil)
+    }
 
     
     // MARK: - Navigation
@@ -187,6 +193,6 @@ class RestaurantTableViewController: UITableViewController {
         }
         
     }
-    
+
 
 }
