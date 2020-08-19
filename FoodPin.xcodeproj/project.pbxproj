@@ -31,6 +31,7 @@
 		9C8772DC24DFCA2000226BA5 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8772DB24DFCA2000226BA5 /* ReviewViewController.swift */; };
 		9C9BA4CA24E82CA600FB26A0 /* RoundedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9BA4C924E82CA600FB26A0 /* RoundedTextField.swift */; };
 		9C9BA4CC24E82F1100FB26A0 /* NewRestaurantController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9BA4CB24E82F1100FB26A0 /* NewRestaurantController.swift */; };
+		9C9BA4F224ED641600FB26A0 /* FoodPin.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9C9BA4F024ED641600FB26A0 /* FoodPin.xcdatamodeld */; };
 		9CBE19D324B048050093C57B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBE19D224B048050093C57B /* AppDelegate.swift */; };
 		9CBE19D524B048050093C57B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBE19D424B048050093C57B /* SceneDelegate.swift */; };
 		9CBE19DA24B048050093C57B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CBE19D824B048050093C57B /* Main.storyboard */; };
@@ -65,6 +66,7 @@
 		9C8772DB24DFCA2000226BA5 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		9C9BA4C924E82CA600FB26A0 /* RoundedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextField.swift; sourceTree = "<group>"; };
 		9C9BA4CB24E82F1100FB26A0 /* NewRestaurantController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRestaurantController.swift; sourceTree = "<group>"; };
+		9C9BA4F124ED641600FB26A0 /* FoodPin.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FoodPin.xcdatamodel; sourceTree = "<group>"; };
 		9CBE19CF24B048050093C57B /* FoodPin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodPin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CBE19D224B048050093C57B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9CBE19D424B048050093C57B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 				9CBE19D424B048050093C57B /* SceneDelegate.swift */,
 				9CBE19DB24B048070093C57B /* Assets.xcassets */,
 				9CBE19E024B048070093C57B /* Info.plist */,
+				9C9BA4F024ED641600FB26A0 /* FoodPin.xcdatamodeld */,
 			);
 			path = FoodPin;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 				9CBE19D524B048050093C57B /* SceneDelegate.swift in Sources */,
 				9CBE19E724B048A10093C57B /* RestaurantTableViewController.swift in Sources */,
 				9C8772DA24D677CB00226BA5 /* MapViewController.swift in Sources */,
+				9C9BA4F224ED641600FB26A0 /* FoodPin.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -502,6 +506,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		9C9BA4F024ED641600FB26A0 /* FoodPin.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				9C9BA4F124ED641600FB26A0 /* FoodPin.xcdatamodel */,
+			);
+			currentVersion = 9C9BA4F124ED641600FB26A0 /* FoodPin.xcdatamodel */;
+			path = FoodPin.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 9CBE19C724B048050093C57B /* Project object */;
 }

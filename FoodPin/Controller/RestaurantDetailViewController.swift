@@ -14,7 +14,7 @@ class RestaurantDetailViewController: UIViewController, UITableViewDelegate, UIT
     @IBOutlet var headerView: RestaurantDetailHeaderView!
     
     
-    var restaurant = Restaurant()
+    var restaurant: RestaurantMO!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,9 +30,11 @@ class RestaurantDetailViewController: UIViewController, UITableViewDelegate, UIT
         
         navigationItem.largeTitleDisplayMode = .never
         
-        headerView.nameLabel.text = restaurant.name
-        headerView.typeLabel.text = restaurant.type
-        headerView.headerImageView.image = UIImage(named: restaurant.image)
+        headerView.nameLabel.text = restaurant.name!
+        headerView.typeLabel.text = restaurant.type!
+        if let restaurantImage = restaurant.image {
+            headerView.headerImageView.image = UIImage(data: restaurantImage as Data)
+        }
         headerView.heartImageView.isHidden = (restaurant.isVisited) ? false : true
         
         tableView.delegate = self
@@ -92,7 +94,10 @@ class RestaurantDetailViewController: UIViewController, UITableViewDelegate, UIT
             
         case 4:
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailMapCell.self), for: indexPath) as! RestaurantDetailMapCell
-            cell.configure(locaiton: restaurant.location)
+            if let restaurantLocation = restaurant.location {
+                cell.configure(locaiton: restaurantLocation)
+            }
+            
             cell.selectionStyle = .none
             
             return cell
