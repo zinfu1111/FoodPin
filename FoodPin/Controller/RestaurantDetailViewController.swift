@@ -37,6 +37,10 @@ class RestaurantDetailViewController: UIViewController, UITableViewDelegate, UIT
         }
         headerView.heartImageView.isHidden = (restaurant.isVisited) ? false : true
         
+        if let rating = restaurant.rating {
+            headerView.ratingImageView.image = UIImage(named: rating)
+        }
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
@@ -80,7 +84,7 @@ class RestaurantDetailViewController: UIViewController, UITableViewDelegate, UIT
             
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RestaurantDetailTextCell.self), for: indexPath) as! RestaurantDetailTextCell
-            cell.descriptionLabel.text = restaurant.description
+            cell.descriptionLabel.text = restaurant.summary
             cell.selectionStyle = .none
             
             return cell
@@ -141,6 +145,10 @@ class RestaurantDetailViewController: UIViewController, UITableViewDelegate, UIT
             if let rating = segue.identifier {
                 self.restaurant.rating = rating
                 self.headerView.ratingImageView.image = UIImage(named: rating)
+                
+                if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+                    appDelegate.saveContext()
+                }
                 
                 let scaleTransform = CGAffineTransform.init(scaleX: 0.1, y: 0.1)
                 self.headerView.ratingImageView.transform = scaleTransform
