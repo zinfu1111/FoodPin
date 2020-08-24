@@ -42,7 +42,7 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
 //        self.navigationItem.searchController = searchController
         
         // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+//         self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
@@ -84,6 +84,17 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
     
     override func viewDidAppear(_ animated: Bool) {
         navigationController?.navigationBar.topItem?.title = "FoodPin"
+        
+        if UserDefaults.standard.bool(forKey: "hasViewedWalkthrough") {
+            return
+        }
+        
+        let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
+        if let walkthroughViewController = storyboard.instantiateViewController(withIdentifier: "walkthroughViewController") as? WalkthroughViewController {
+            
+            present(walkthroughViewController, animated: true, completion: nil)
+        }
+        
     }
     
     //MARK: - SearchController
