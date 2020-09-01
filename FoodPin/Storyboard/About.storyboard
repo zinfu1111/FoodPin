@@ -3,24 +3,48 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--About-->
         <scene sceneID="F8R-DO-kdQ">
             <objects>
-                <tableViewController id="w4p-fc-qFn" sceneMemberID="viewController">
+                <tableViewController id="w4p-fc-qFn" customClass="AboutTableViewController" customModule="FoodPin" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="aVp-Ij-cGT">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="yK4-2y-5NU">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="foodpin-logo" translatesAutoresizingMaskIntoConstraints="NO" id="rZ6-Qq-gUC">
+                                    <rect key="frame" x="136" y="33.5" width="142" height="53"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <constraints>
+                                <constraint firstItem="rZ6-Qq-gUC" firstAttribute="centerX" secondItem="yK4-2y-5NU" secondAttribute="centerX" id="fLz-w6-Tjy"/>
+                                <constraint firstItem="rZ6-Qq-gUC" firstAttribute="centerY" secondItem="yK4-2y-5NU" secondAttribute="centerY" id="vc6-XT-z2U"/>
+                            </constraints>
+                        </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="gyg-Lk-B00">
-                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AboutCell" textLabel="qt0-iA-h49" style="IBUITableViewCellStyleDefault" id="gyg-Lk-B00">
+                                <rect key="frame" x="0.0" y="148" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gyg-Lk-B00" id="fgA-Oh-QtV">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qt0-iA-h49">
+                                            <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -30,10 +54,48 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="About" id="swy-QJ-uf1"/>
+                    <connections>
+                        <segue destination="fM4-2l-eAS" kind="show" identifier="showWebView" id="fq6-5a-rCs"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X60-qj-v7v" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="241" y="1028"/>
+        </scene>
+        <!--Web View Controller-->
+        <scene sceneID="UL9-dO-yHq">
+            <objects>
+                <viewController id="fM4-2l-eAS" customClass="WebViewController" customModule="FoodPin" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="J6a-g5-aEh">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Yo-Z7-Mky">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="1Yo-Z7-Mky" firstAttribute="trailing" secondItem="hqe-nr-zhV" secondAttribute="trailing" id="CbU-W7-R9B"/>
+                            <constraint firstAttribute="bottom" secondItem="1Yo-Z7-Mky" secondAttribute="bottom" id="Fy5-sO-woS"/>
+                            <constraint firstItem="1Yo-Z7-Mky" firstAttribute="leading" secondItem="hqe-nr-zhV" secondAttribute="leading" id="GZe-EM-ffh"/>
+                            <constraint firstItem="1Yo-Z7-Mky" firstAttribute="top" secondItem="J6a-g5-aEh" secondAttribute="top" id="X92-vz-5Xx"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="hqe-nr-zhV"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="rha-B2-tTZ"/>
+                    <connections>
+                        <outlet property="webView" destination="1Yo-Z7-Mky" id="Nxa-Td-jTo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pg9-Bg-hyi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1176.8115942028987" y="1027.9017857142858"/>
         </scene>
         <!--About-->
         <scene sceneID="6UV-Bc-qmV">
@@ -55,5 +117,6 @@
     </scenes>
     <resources>
         <image name="about" width="23" height="21"/>
+        <image name="foodpin-logo" width="142" height="53"/>
     </resources>
 </document>

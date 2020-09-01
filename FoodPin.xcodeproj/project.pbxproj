@@ -38,6 +38,9 @@
 		9C9BA4FA24F4103500FB26A0 /* WalkthroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9BA4F924F4103500FB26A0 /* WalkthroughViewController.swift */; };
 		9C9BA4FF24F7F8D200FB26A0 /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C9BA4FE24F7F8D200FB26A0 /* About.storyboard */; };
 		9C9BA50124F7F90300FB26A0 /* Discover.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C9BA50024F7F90300FB26A0 /* Discover.storyboard */; };
+		9C9BA50324FB7B9400FB26A0 /* AboutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9BA50224FB7B9400FB26A0 /* AboutTableViewController.swift */; };
+		9C9BA50524FB855300FB26A0 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9BA50424FB855300FB26A0 /* WebViewController.swift */; };
+		9C9BA50724FB890A00FB26A0 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C9BA50624FB890A00FB26A0 /* WebKit.framework */; };
 		9CBE19D324B048050093C57B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBE19D224B048050093C57B /* AppDelegate.swift */; };
 		9CBE19D524B048050093C57B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBE19D424B048050093C57B /* SceneDelegate.swift */; };
 		9CBE19DA24B048050093C57B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CBE19D824B048050093C57B /* Main.storyboard */; };
@@ -79,6 +82,9 @@
 		9C9BA4F924F4103500FB26A0 /* WalkthroughViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughViewController.swift; sourceTree = "<group>"; };
 		9C9BA4FE24F7F8D200FB26A0 /* About.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = About.storyboard; sourceTree = "<group>"; };
 		9C9BA50024F7F90300FB26A0 /* Discover.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Discover.storyboard; sourceTree = "<group>"; };
+		9C9BA50224FB7B9400FB26A0 /* AboutTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTableViewController.swift; sourceTree = "<group>"; };
+		9C9BA50424FB855300FB26A0 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		9C9BA50624FB890A00FB26A0 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		9CBE19CF24B048050093C57B /* FoodPin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodPin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CBE19D224B048050093C57B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9CBE19D424B048050093C57B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C9BA50724FB890A00FB26A0 /* WebKit.framework in Frameworks */,
 				9C8772D424D661D600226BA5 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -113,6 +120,8 @@
 				9C9BA4F524F400D100FB26A0 /* WalkthroughContentViewController.swift */,
 				9C9BA4F724F402B000FB26A0 /* WalkthroughPageViewController.swift */,
 				9C9BA4F924F4103500FB26A0 /* WalkthroughViewController.swift */,
+				9C9BA50224FB7B9400FB26A0 /* AboutTableViewController.swift */,
+				9C9BA50424FB855300FB26A0 /* WebViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -188,6 +197,7 @@
 		9C8772D224D661D600226BA5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9C9BA50624FB890A00FB26A0 /* WebKit.framework */,
 				9C8772D324D661D600226BA5 /* MapKit.framework */,
 			);
 			name = Frameworks;
@@ -315,6 +325,7 @@
 				9C8772D124D5D1D400226BA5 /* UINavigationController+Ext.swift in Sources */,
 				9CBE19E924B051E90093C57B /* RestaurantTableViewCell.swift in Sources */,
 				9C9BA4F824F402B000FB26A0 /* WalkthroughPageViewController.swift in Sources */,
+				9C9BA50324FB7B9400FB26A0 /* AboutTableViewController.swift in Sources */,
 				9C9BA4CC24E82F1100FB26A0 /* NewRestaurantController.swift in Sources */,
 				9C8772DC24DFCA2000226BA5 /* ReviewViewController.swift in Sources */,
 				9C8772CC24CC4CF200226BA5 /* RestaurantDetailTextCell.swift in Sources */,
@@ -325,6 +336,7 @@
 				9C8772D624D66A2900226BA5 /* RestaurantDetailSeparatorCell.swift in Sources */,
 				9C8772D824D66AD700226BA5 /* RestaurantDetailMapCell.swift in Sources */,
 				9C8772A024BAEA8900226BA5 /* RestaurantDetailViewController.swift in Sources */,
+				9C9BA50524FB855300FB26A0 /* WebViewController.swift in Sources */,
 				9C9BA4F624F400D100FB26A0 /* WalkthroughContentViewController.swift in Sources */,
 				9C9BA4CA24E82CA600FB26A0 /* RoundedTextField.swift in Sources */,
 				9C9BA4FA24F4103500FB26A0 /* WalkthroughViewController.swift in Sources */,
