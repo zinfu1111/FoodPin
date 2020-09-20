@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9C32A24825179BCC009CD406 /* DiscoverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C32A24725179BCC009CD406 /* DiscoverTableViewCell.swift */; };
 		9C8772A024BAEA8900226BA5 /* RestaurantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C87729F24BAEA8900226BA5 /* RestaurantDetailViewController.swift */; };
 		9C8772A224C470C700226BA5 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8772A124C470C700226BA5 /* Restaurant.swift */; };
 		9C8772BD24CC0D4D00226BA5 /* Rubik-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9C8772B324CC0D4D00226BA5 /* Rubik-Bold.ttf */; };
@@ -53,6 +54,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9C32A24725179BCC009CD406 /* DiscoverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverTableViewCell.swift; sourceTree = "<group>"; };
 		9C87729F24BAEA8900226BA5 /* RestaurantDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailViewController.swift; sourceTree = "<group>"; };
 		9C8772A124C470C700226BA5 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		9C8772B324CC0D4D00226BA5 /* Rubik-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Bold.ttf"; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				9C8772D524D66A2900226BA5 /* RestaurantDetailSeparatorCell.swift */,
 				9C8772D724D66AD700226BA5 /* RestaurantDetailMapCell.swift */,
 				9C9BA4C924E82CA600FB26A0 /* RoundedTextField.swift */,
+				9C32A24725179BCC009CD406 /* DiscoverTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C8772D124D5D1D400226BA5 /* UINavigationController+Ext.swift in Sources */,
+				9C32A24825179BCC009CD406 /* DiscoverTableViewCell.swift in Sources */,
 				9CBE19E924B051E90093C57B /* RestaurantTableViewCell.swift in Sources */,
 				9C9BA4F824F402B000FB26A0 /* WalkthroughPageViewController.swift in Sources */,
 				9C9BA50324FB7B9400FB26A0 /* AboutTableViewController.swift in Sources */,

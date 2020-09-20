@@ -72,7 +72,7 @@ class DiscoverTableViewController: UITableViewController {
         
         //以query建立查詢操作
         let queryOperation = CKQueryOperation(query: query)
-        queryOperation.desiredKeys = ["name"]
+        queryOperation.desiredKeys = ["name","type","location","phone","description"]
         queryOperation.queuePriority = .veryHigh
         queryOperation.resultsLimit = 50
         queryOperation.recordFetchedBlock = { (record) in
@@ -119,14 +119,18 @@ class DiscoverTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DiscoverCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DiscoverCell", for: indexPath) as! DiscoverTableViewCell
 
         // Configure the cell...
         let restaurant = restaurants[indexPath.row]
-        cell.textLabel?.text = restaurant.object(forKey: "name") as? String
+        cell.nameLabel.text = restaurant.object(forKey: "name") as? String
+        cell.typeLabel.text = restaurant.object(forKey: "type") as? String
+        cell.locationLabel.text = restaurant.object(forKey: "location") as? String
+        cell.phoneLabel.text = restaurant.object(forKey: "phone") as? String
+        cell.descriptionLabel.text = restaurant.object(forKey: "description") as? String
         
         //set default photo
-        cell.imageView?.image = UIImage(systemName: "photo")
+        cell.restaurantImageView.image = UIImage(named: "photo")
         
         //檢查圖片是否已儲存在快取中
         if let imageFileURL = imageCache.object(forKey: restaurant.recordID) {
@@ -135,7 +139,7 @@ class DiscoverTableViewController: UITableViewController {
             print("Get image from cache")
             
             if let imageData = try? Data(contentsOf: imageFileURL as URL) {
-                cell.imageView?.image = UIImage(data: imageData)
+                cell.restaurantImageView?.image = UIImage(data: imageData)
             }
             
         } else {
@@ -162,7 +166,7 @@ class DiscoverTableViewController: UITableViewController {
                         
                         //將站位符圖片以餐廳圖片來取代
                         DispatchQueue.main.async {
-                            cell.imageView?.image = UIImage(data: imageData)
+                            cell.restaurantImageView.image = UIImage(data: imageData)
                             cell.setNeedsLayout()
                         }
                         
