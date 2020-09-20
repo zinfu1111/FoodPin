@@ -11,6 +11,9 @@ import CloudKit
 
 class DiscoverTableViewController: UITableViewController {
 
+    var spinner = UIActivityIndicatorView()
+    
+    private var imageCache = NSCache<CKRecord.ID, NSURL>()
     var restaurants: [CKRecord] = []
     
     override func viewDidLoad() {
@@ -33,6 +36,17 @@ class DiscoverTableViewController: UITableViewController {
             navigationController?.navigationBar.largeTitleTextAttributes = [ NSAttributedString.Key.foregroundColor: UIColor(red: 231, green: 76, blue: 60),NSAttributedString.Key.font: customFont]
         }
         
+        spinner.style = .medium
+        spinner.hidesWhenStopped = true
+        view.addSubview(spinner)
+        
+        //旋轉視圖的約束條件
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([ spinner.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 150.0), spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor)])
+        
+        //啟用旋轉視圖
+        spinner.startAnimating()
+        
         fetchRecordFromCloud()
     }
     
@@ -43,26 +57,32 @@ class DiscoverTableViewController: UITableViewController {
         let publicDatabase = cloudContainer.publicCloudDatabase
         let predicate = NSPredicate(value: true)
         let query = CKQuery(recordType: "Restaurant", predicate: predicate)
-        publicDatabase.perform(query, inZoneWith: nil, completionHandler: { (results, error) -> Void in
-            
+        
+        //以query建立查詢操作
+        let queryOperation = CKQueryOperation(query: query)
+        queryOperation.desiredKeys = ["name"]
+        queryOperation.queuePriority = .veryHigh
+        queryOperation.resultsLimit = 50
+        queryOperation.recordFetchedBlock = { (record) in
+            self.restaurants.append(record)
+        }
+        
+        queryOperation.queryCompletionBlock = { [unowned self](cursor, error) in
             if let error = error {
-                print(error)
+                print("Failed to get data from iCloud - \(error.localizedDescription)")
                 return
             }
             
-            if let results = results {
-                print("Completed the download of Restaurant data")
-                self.restaurants = results
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-                
-            }
+            print("Successfully retrieve the data from iCloud")
             
-        })
+            DispatchQueue.main.async {
+                self.spinner.stopAnimating()
+                self.tableView.reloadData()
+            }
+        }
         
-        
-        
+        //執行查詢
+        publicDatabase.add(queryOperation)
         
     }
 
@@ -86,14 +106,61 @@ class DiscoverTableViewController: UITableViewController {
         let restaurant = restaurants[indexPath.row]
         cell.textLabel?.text = restaurant.object(forKey: "name") as? String
         
-        if let image = restaurant.object(forKey: "image"), let imageAsset = image as? CKAsset {
+        //set default photo
+        cell.imageView?.image = UIImage(systemName: "photo")
+        
+        //檢查圖片是否已儲存在快取中
+        if let imageFileURL = imageCache.object(forKey: restaurant.recordID) {
             
-            if let imageData = try? Data(contentsOf: imageAsset.fileURL!) {
+            //從快取中取得圖片
+            print("Get image from cache")
+            
+            if let imageData = try? Data(contentsOf: imageFileURL as URL) {
                 cell.imageView?.image = UIImage(data: imageData)
             }
+            
+        } else {
+            
+            //取得圖片
+            let publicDatabase = CKContainer.default().publicCloudDatabase
+            let fetchRecordsImageOperation = CKFetchRecordsOperation(recordIDs: [restaurant.recordID])
+            fetchRecordsImageOperation.desiredKeys = ["image"]
+            fetchRecordsImageOperation.queuePriority = .veryHigh
+            
+            
+            fetchRecordsImageOperation.perRecordCompletionBlock = { (record, recordID, error) in
+                
+                if let error = error {
+                    print("Failed to get restaurant image: \(error.localizedDescription)")
+                    return
+                }
+                
+                if let restaurantRecord = record,
+                   let image = restaurantRecord.object(forKey: "image"),
+                   let imageAsset = image as? CKAsset {
+                    
+                    if let imageData = try? Data(contentsOf: imageAsset.fileURL!) {
+                        
+                        //將站位符圖片以餐廳圖片來取代
+                        DispatchQueue.main.async {
+                            cell.imageView?.image = UIImage(data: imageData)
+                            cell.setNeedsLayout()
+                        }
+                        
+                        //加入圖片URL至快取
+                        self.imageCache.setObject(imageAsset.fileURL! as NSURL, forKey: restaurant.recordID)
+                    }
+                    
+                }
+            }
+            
+            publicDatabase.add(fetchRecordsImageOperation)
+
         }
         
-
+        
+        
+        
         return cell
     }
     
