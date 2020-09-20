@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import ClockKit
 
 class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -177,10 +178,53 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
             
             print("Save data to context")
             appDelegate.saveContext()
-            
+            saveRecordToCloud(restaurant: restaurant)
         }
         
         
         dismiss(animated: true, completion: nil)
+    }
+    
+    func saveRecordToCloud(restaurant: RestaurantMO!) -> Void {
+        
+        //準備要儲存的紀錄
+        let record = CKRecord(recordType: "Restaurant")
+        record.setValue(restaurant.name, forKey: "name")
+        record.setValue(restaurant.type, forKey: "type")
+        record.setValue(restaurant.location, forKey: "location")
+        record.setValue(restaurant.phone, forKey: "phone")
+        record.setValue(restaurant.summary, forKey: "summary")
+        
+        
+        let imageData = restaurant.image! as Data
+        
+        
+        //調整圖片大小
+        let originalImage = UIImage(data: imageData)!
+        let scalingFactor = (originalImage.size.width > 1024) ? 1024/originalImage.size.width : 1.0
+        let scaledImage = UIImage(data: imageData, scale: scalingFactor)
+        
+        
+        //將圖片寫在local檔案暫存
+        let imageFilePath = NSTemporaryDirectory() + restaurant.name!
+        let imageFileURL = URL(fileURLWithPath: imageFilePath)
+        try? scaledImage?.jpegData(compressionQuality: 0.8)?.write(to: imageFileURL)
+        
+        
+        //建立要上傳的圖片素材
+        let imageAsset = CKAsset(fileURL: imageFileURL)
+        record.setValue(imageAsset, forKey: "image")
+        
+        
+        //讀取iCloud公共資料庫
+        let publicDatabase = CKContainer.default().publicCloudDatabase
+        
+        //儲存資料至iCloud
+        publicDatabase.save(record, completionHandler: { (record, error) in
+            //移除暫存檔
+            try? FileManager.default.removeItem(at: imageFileURL)
+        })
+        
+        
     }
 }

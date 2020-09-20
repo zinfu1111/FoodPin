@@ -48,15 +48,27 @@ class DiscoverTableViewController: UITableViewController {
         spinner.startAnimating()
         
         fetchRecordFromCloud()
+        
+        //下拉更新控制元件
+        refreshControl = UIRefreshControl()
+        refreshControl?.backgroundColor = UIColor.white
+        refreshControl?.tintColor = UIColor.gray
+        refreshControl?.addTarget(self, action: #selector(fetchRecordFromCloud), for: UIControl.Event.valueChanged)
+        
     }
     
-    func fetchRecordFromCloud() {
+    @objc func fetchRecordFromCloud() {
+        
+        //先移除舊資料
+        restaurants.removeAll()
+        self.tableView.reloadData()
         
         //使用便利型API取得資料
         let cloudContainer = CKContainer.default()
         let publicDatabase = cloudContainer.publicCloudDatabase
         let predicate = NSPredicate(value: true)
         let query = CKQuery(recordType: "Restaurant", predicate: predicate)
+        query.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         
         //以query建立查詢操作
         let queryOperation = CKQueryOperation(query: query)
@@ -76,8 +88,15 @@ class DiscoverTableViewController: UITableViewController {
             print("Successfully retrieve the data from iCloud")
             
             DispatchQueue.main.async {
+                //查詢完畢更新UI
                 self.spinner.stopAnimating()
+                
                 self.tableView.reloadData()
+                if let refreshControl = self.refreshControl {
+                    if refreshControl.isRefreshing {
+                        refreshControl.endRefreshing()
+                    }
+                }
             }
         }
         
@@ -128,7 +147,7 @@ class DiscoverTableViewController: UITableViewController {
             fetchRecordsImageOperation.queuePriority = .veryHigh
             
             
-            fetchRecordsImageOperation.perRecordCompletionBlock = { (record, recordID, error) in
+            fetchRecordsImageOperation.perRecordCompletionBlock = { [unowned self] (record, recordID, error) in
                 
                 if let error = error {
                     print("Failed to get restaurant image: \(error.localizedDescription)")
