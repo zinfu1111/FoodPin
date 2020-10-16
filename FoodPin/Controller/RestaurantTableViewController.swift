@@ -47,7 +47,7 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        Thread.sleep(forTimeInterval: 1)
+//        Thread.sleep(forTimeInterval: 1)
         navigationController?.navigationBar.prefersLargeTitles = true
         tableView.cellLayoutMarginsFollowReadableWidth = true
         tableView.backgroundView = emptyRstaurantView
