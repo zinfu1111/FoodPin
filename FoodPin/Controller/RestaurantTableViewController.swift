@@ -84,7 +84,7 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        navigationController?.navigationBar.topItem?.title = "FoodPin"
+        navigationController?.navigationBar.topItem?.title = "PaulFoodPin"
         
         if UserDefaults.standard.bool(forKey: "hasViewedWalkthrough") {
             return
